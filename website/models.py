@@ -24,7 +24,7 @@ class Product(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     
     
-class Employers(db.Model):
+class Employer(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     employer_firstname = db.Column(db.String(150))
     employer_lastname = db.Column(db.String(150))

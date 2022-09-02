@@ -2,7 +2,7 @@ from unicodedata import name
 from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 from flask_login import login_required, current_user
 from .models import Product
-from .models import Employers
+from .models import Employer
 from .import db
 import json
 
@@ -62,9 +62,25 @@ def employers():
         if len(employer_firstname) < 1:
             flash('Employer Name is too short!', category='error')
         else:
-            new_employer = Employers(employer_firstname = employer_firstname, employer_lastname = employer_lastname, user_id=current_user.id)
+            new_employer = Employer(employer_firstname = employer_firstname, employer_lastname = employer_lastname, user_id=current_user.id)
             db.session.add(new_employer)
             db.session.commit()
             flash('Employer added!', category='success')
 
     return render_template("employers.html", user=current_user)
+
+
+
+
+
+@views.route('/products')
+def products():
+    products = Product.query.all()
+    return render_template("products.html", products=products, user=current_user)
+
+
+
+@views.route('/employers')
+def show_employers():
+    employers = Employer.query.all()
+    return render_template("employers.html", employers=employers, user=current_user)

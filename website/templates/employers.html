@@ -1,0 +1,56 @@
+{% extends "base.html" %} {% block title %}Employers{% endblock %} {% block content%}
+<h1 align="left">Employers</h1>
+{% for row in  Employers  %}
+<div class="container">
+</div>
+<div class="card mb-3">
+  <div class="card-body">
+    <div class="d-flex flex-column flex-lg-row">
+      <span class="avatar avatar-text rounded-3 me-4 mb-2">{{ Employers.employer_firstname }}</span>
+      <div class="row flex-fill">
+        <div class="col-sm-5">
+          <h4 class="h5">{{ employer_lastname }}</h4>
+          <span class="badge bg-secondary">{{  employer_firstname }}</span> <span class="badge bg-success">CHF {{ employer_firstname }}</span>
+        </div>
+        <div class="col-sm-3 text-lg-end clearfix">
+          <a href="#" class="btn btn-danger float-right ml-2 stretched-link"
+            onClick="deleteProduct('{{ product.id }}')">Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+<form method="POST">
+  <br />
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add a new Employer</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="POST">
+            <div class="form-outline mb-4">
+              <input type="text" class="form-control" id="employer_firstname" name="employer_firstname"
+                placeholder="First Name" />
+            </div>
+            <div class="form-outline mb-4">
+              <input type="text" class="form-control" id="employer_lastname" name="employer_lastname"
+                placeholder="Last Name" />
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="submit" class="btn btn-dark">Add</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

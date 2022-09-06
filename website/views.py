@@ -1,12 +1,11 @@
 from unicodedata import name
-from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
+from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for, make_response
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_required, current_user
 from collections import Counter
-from .models import Product
-from .models import Employer
-from .models import User
+from .models import Product, Employer, User
 from .import db
+import pdfkit
 import json
 
 
@@ -71,5 +70,10 @@ def dashboard():
 
 
 
+@views.route('/')
+@login_required
+def pdf_template(Product):
+    employers = User.query.all()
+    rendered = render_template('pdf-template.html')
 
 

@@ -6,7 +6,6 @@ from flask_migrate import Migrate
 
 
 
-
 db = SQLAlchemy()
 DB_NAME = "database.db"
 

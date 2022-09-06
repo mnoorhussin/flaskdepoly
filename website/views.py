@@ -1,8 +1,10 @@
 from unicodedata import name
 from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
+from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_required, current_user
 from .models import Product
 from .models import Employer
+from .models import User
 from .import db
 import json
 
@@ -52,35 +54,16 @@ def delete_product():
     return jsonify({})
 
 
-
-@views.route('/employers', methods=['GET', 'POST'])
-@login_required
-def employers():
-    if request.method == 'POST':
-        employer_firstname = request.form.get("employer_firstname")
-        employer_lastname = request.form.get("employer_lastname")
-        if len(employer_firstname) < 1:
-            flash('Employer Name is too short!', category='error')
-        else:
-            new_employer = Employer(employer_firstname = employer_firstname, employer_lastname = employer_lastname, user_id=current_user.id)
-            db.session.add(new_employer)
-            db.session.commit()
-            flash('Employer added!', category='success')
-
-    return render_template("employers.html", user=current_user)
-
-
-
-
-
 @views.route('/products')
+@login_required
 def products():
     products = Product.query.all()
     return render_template("products.html", products=products, user=current_user)
 
 
 
-@views.route('/employers')
-def show_employers():
-    employers = Employer.query.all()
-    return render_template("employers.html", employers=employers, user=current_user)
+@views.route('/dashboard')
+@login_required
+def dashboard():
+    employers = User.query.all()
+    return render_template("dashboard.html", User=User, user=current_user)

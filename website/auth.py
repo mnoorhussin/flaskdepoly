@@ -61,7 +61,7 @@ def sign_up():
                 password1, method='sha256'))
             db.session.add(new_user)
             db.session.commit()
-            login_user(user, remember=True)
+            login_user(new_user, remember=True)
             flash('Account created!', category='success')
             return redirect(url_for('views.home'))
 
@@ -74,9 +74,15 @@ def products():
     return render_template("products.html", user=current_user)
 
 
-@auth.route('/employers')
-def employers():
-    return render_template("employers.html", user=current_user)
+@auth.route('/reports')
+def reports():
+    return render_template("reports.html", user=current_user)
+
+
+@auth.route('/invoices')
+def invoices():
+    return render_template("invoices.html", user=current_user)
+
 
 @auth.route('/notes')
 def notes():

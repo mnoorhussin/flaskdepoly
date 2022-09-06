@@ -2,6 +2,7 @@ from unicodedata import name
 from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_required, current_user
+from collections import Counter
 from .models import Product
 from .models import Employer
 from .models import User
@@ -67,3 +68,8 @@ def products():
 def dashboard():
     employers = User.query.all()
     return render_template("dashboard.html", User=User, user=current_user)
+
+
+
+
+

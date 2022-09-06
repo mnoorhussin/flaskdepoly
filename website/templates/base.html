@@ -14,9 +14,7 @@
 </head>
 {% if user.is_authenticated %}
 <body>
-
   <div id="wrapper">
-
     <!-- Sidebar -->
     <div id="sidebar-wrapper">
       <ul class="sidebar-nav">
@@ -44,22 +42,18 @@
           <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
         </li>
         {% else %}
-        <li>
-          <a class="nav-item nav-link" id="login" href="/login">Login</a>
-        </li>
-        <li>
-          <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
-        </li>
-      </ul>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="nav-item nav-link" id="login" href="/login">Login</a>
+            <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
     </div>
-    {% endif %}
-    <!-- /#sidebar-wrapper -->
+  </div>
+  </nav>
+  </ul>
+  </div>
+  {% endif %}
+  <!-- /#sidebar-wrapper -->
   </div>
   <!-- /#wrapper -->
-
-
-
-
   {% with messages = get_flashed_messages(with_categories=true) %} {% if
   messages %} {% for category, message in messages %} {% if category ==
   'error' %}

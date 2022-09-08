@@ -82,7 +82,7 @@ def update(id):
         editproduct.price = request.form['price']
         try:
             db.session.commit()
-            return render_template('home.html', user=current_user)
+            return redirect('/')
         except:
             return" There was problem updating your product!"        
 

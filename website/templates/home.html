@@ -30,9 +30,8 @@
           <span class="badge bg-info">QTY {{ product.qty }}</span> <span class="badge bg-success">ID {{ product.id }}</span>
         </div>
         <div class="col-sm-7 text-lg-end clearfix ">
-          <a href="#" class="btn btn-danger float-right ml-2 stretched-link"
-            onClick="deleteProduct('{{ product.id }}')">Delete</a>
-            <a href="/update/{{product.id}}" class="btn btn-info float-right ml-2 stretched-link" data-toggle="modal_edit" data-target="#exampleModal">Edit</a>
+          <button href="#" class="btn btn-danger float-right ml-2 stretched-link" onClick="deleteProduct('{{ product.id }}')">Delete</button>
+          <a href="/update/{{product.id}}" class="btn btn-info float-right ml-2 stretched-link" data-toggle="modal_edit" data-target="#exampleModal">Edit</a>
         </div>
       </div>
     </div>

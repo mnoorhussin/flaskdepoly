@@ -32,8 +32,7 @@
         <div class="col-sm-7 text-lg-end clearfix ">
           <a href="#" class="btn btn-danger float-right ml-2 stretched-link"
             onClick="deleteProduct('{{ product.id }}')">Delete</a>
-            <a href="#" class="btn btn-info float-right ml-2 stretched-link"
-            onClick="deleteProduct('{{ product.id }}')">Invoice</a>
+            <a href="/update/{{product.id}}" class="btn btn-info float-right ml-2 stretched-link" data-toggle="modal_edit" data-target="#exampleModal">Edit</a>
         </div>
       </div>
     </div>

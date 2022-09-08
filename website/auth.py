@@ -73,20 +73,4 @@ def sign_up():
 def products():
     return render_template("products.html", user=current_user)
 
-
-@auth.route('/reports')
-def reports():
-    return render_template("reports.html", user=current_user)
-
-
-@auth.route('/invoices')
-def invoices():
-    return render_template("invoices.html", user=current_user)
-
-
-@auth.route('/notes')
-def notes():
-    return render_template("notes.html", user=current_user)
-
-
     

@@ -1,11 +1,10 @@
 from unicodedata import name
-from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for, make_response
+from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_required, current_user
 from collections import Counter
 from .models import Product, Employer, User
 from .import db
-import pdfkit
 import json
 
 
@@ -54,6 +53,8 @@ def delete_product():
     return jsonify({})
 
 
+
+
 @views.route('/products')
 @login_required
 def products():
@@ -62,18 +63,28 @@ def products():
 
 
 
-@views.route('/dashboard')
+@views.route('/profile')
 @login_required
-def dashboard():
+def profile():
     employers = User.query.all()
-    return render_template("dashboard.html", User=User, user=current_user)
+    return render_template("profile.html", User=User, user=current_user)
 
 
 
-@views.route('/')
+@views.route('/update/<int:id>', methods=['GET', 'POST'])
 @login_required
-def pdf_template(Product):
-    employers = User.query.all()
-    rendered = render_template('pdf-template.html')
+def update(id):
+    editproduct = Product.query.get_or_404(id)
+    if request.method == 'POST':
+        editproduct.product_name = request.form['product_name']
+        editproduct.description = request.form['description']
+        editproduct.qty = request.form['qty']
+        editproduct.price = request.form['price']
+        try:
+            db.session.commit()
+            return render_template('home.html', user=current_user)
+        except:
+            return" There was problem updating your product!"        
 
-
+    else:
+        return render_template("update.html", editproduct=editproduct, user=current_user)

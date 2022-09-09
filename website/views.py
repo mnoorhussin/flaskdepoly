@@ -1,3 +1,4 @@
+from socketserver import DatagramRequestHandler
 from unicodedata import name
 from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -7,10 +8,7 @@ from .models import Product, Employer, User
 from .import db
 import json
 
-
-
-
-
+    
 views = Blueprint('views', __name__)
 
 
@@ -36,38 +34,20 @@ def home():
     return render_template("home.html", user=current_user)
 
 
-    
-        
 
-@views.route('/delete-product', methods=['POST'])
-def delete_product():
-    product = json.loads(request.data)
-    productId = product['productId']
-    product = Product.query.get(productId)
-    if product:
-        if product.user_id == current_user.id:
-            db.session.delete(product)
-            db.session.commit()
-            flash('Product deleted!', category='success')
-
-    return jsonify({})
-
-
-
-
-@views.route('/products')
+@views.route('/delete/<int:id>')
 @login_required
-def products():
-    products = Product.query.all()
-    return render_template("products.html", products=products, user=current_user)
-
-
-
-@views.route('/profile')
-@login_required
-def profile():
-    employers = User.query.all()
-    return render_template("profile.html", User=User, user=current_user)
+def delete_product(id):
+    product_to_delete = Product.query.get_or_404(id)
+    try:
+        db.session.delete(product_to_delete)
+        db.session.commit()
+        flash("Product deleted successfully")
+        return redirect('/')
+    except:
+        return" There was problem deleting your product!"   
+    else:
+        return render_template("home.html", product_to_delete=product_to_delete, user=current_user)  
 
 
 
@@ -88,3 +68,20 @@ def update(id):
 
     else:
         return render_template("update.html", editproduct=editproduct, user=current_user)
+    
+    
+    
+    
+@views.route('/products')
+@login_required
+def products():
+    products = Product.query.all()
+    return render_template("products.html", products=products, user=current_user)
+
+
+
+@views.route('/profile')
+@login_required
+def profile():
+    employers = User.query.all()
+    return render_template("profile.html", User=User, user=current_user)

@@ -10,33 +10,68 @@
   </div>
   <div class="ml-auto p-2">
     <form class="form-inline my-2 my-lg-10 ">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search Products" aria-label="Search">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search Products" aria-label="Search" ,
+        name="searched">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>
 </div>
-{% for product in user.product %}
-<div class="container" >
-</div>
-<div class="card mb-3">
-  <div class="card-body">
-    <div class="d-flex flex-column flex-lg-row">
 
-      <div class="row flex-fill">
-        <div class="col-sm-5 ">
-          <h4 class="h5">{{ product.product_name }}</h4>
-          <p class="p"> <strong>Description: </strong> {{ product.description }}</p>
-          <span class="badge bg-secondary">{{ product.date }}</span> <span class="badge bg-success">CHF {{ product.price}}</span> 
-          <span class="badge bg-info">QTY {{ product.qty }}</span> <span class="badge bg-success">ID {{ product.id }}</span>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 ">
+      <div class="row border border-dark rounded" style="padding: 10px; background-color:rgba(0,0,0,.10);">
+        <div class="col-md-4">
+          <h5>Name</h5>
         </div>
-        <div class="col-sm-7 text-lg-end clearfix ">
-          <button href="#" class="btn btn-danger float-right ml-2 stretched-link" onClick="deleteProduct('{{ product.id }}')">Delete</button>
-          <a href="/update/{{product.id}}" class="btn btn-info float-right ml-2 stretched-link" data-toggle="modal_edit" data-target="#exampleModal">Edit</a>
+        <div class="col-md-1">
+          <h5>Price</h5>
+        </div>
+        <div class="col-md-2">
+          <h5>QTY</h5>
+        </div>
+        <div class="col-md-2">
+          <h5>Date</h5>
+        </div>
+        <div class="col-md-1">
+          <h5>ID</h5>
+        </div>
+        <div class="col-md-2">
+          <h5 align="center">Actions</h5>
+        </div>
+      </div>
+      <br>
+      {% for product in user.product %}
+      <div class="container-fluid ">
+        <div class="row">
+          <div class="col-md-12 border-bottom">
+      <div class="row border-dark rounded" style="padding: 10px; background-color:rgba(0,0,0,.10);">
+        <div class="col-md-4 border-right">
+          {{ product.product_name }}
+        </div>
+        <div class="col-md-1 border-right">
+          {{ product.price }}
+        </div>
+        <div class="col-md-2 border-right">
+          {{ product.qty }}
+        </div>
+        <div class="col-md-2 border-right">
+          {{ product.date }}
+        </div>
+        <div class="col-md-1 border-right">
+          {{ product.id }}
+        </div>
+        <div class="col-md-1">
+          <a href="/update/{{product.id}}" class="btn btn-info float-right ml-2 stretched-link ">Edit</a>
+        </div>
+        <div class="col-md-1">
+          <a href="/delete/{{product.id}}" class="btn btn-danger  ml-2 stretched-link">Delete</a>
         </div>
       </div>
     </div>
   </div>
 </div>
+<br>
 {% endfor %}
 <form method="POST">
   <br />
@@ -58,13 +93,12 @@
                 placeholder="Product name" />
             </div>
             <div class="form-outline mb-4">
-              <input type="text" inputmode="decimal" class="form-control" id="price" name="price"
+              <input type="number" min="1" step="any" class="form-control" id="price" name="price"
                 placeholder="Product Price" />
             </div>
             <div class="form-outline mb-4">
               <input type="number" class="form-control" id="qty" name="qty" placeholder="Product QTY" />
             </div>
-            <textarea name="description" id="description" class="form-control" placeholder="description"></textarea>
           </form>
         </div>
         <div class="modal-footer">

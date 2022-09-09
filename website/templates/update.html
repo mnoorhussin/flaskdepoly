@@ -2,24 +2,22 @@
 <h1>Edit Product</h1>
 <br />
 <div calss="container">
-<form action="{{editproduct.id}}" method="POST">
-    <div class="form-outline mb-4">
-        <input type="text" class="form-control" id="product_name" name="product_name"
-            value="{{editproduct.product_name}}" required placeholder="Product name"/>
-    </div>
-    <div class="form-outline mb-4">
-        <input type="text" inputmode="decimal" class="form-control" id="price" name="price"
-            value="{{editproduct.price}}" placeholder="Product Price" />
-    </div>
-    <div class="form-outline mb-4">
-        <input type="number" class="form-control" id="qty" name="qty" placeholder="Product QTY"
-            value="{{editproduct.qty}}" />
-    </div>
-    <textarea name="description" id="description" class="form-control" placeholder="description"
-        value="{{editproduct.description}}"></textarea>
+    <form action="{{editproduct.id}}" method="POST">
+        <div class="form-outline mb-4">
+            <input type="text" class="form-control" id="product_name" name="product_name"
+                value="{{editproduct.product_name}}" required placeholder="Product name" />
+        </div>
+        <div class="form-outline mb-4">
+            <input type="text" inputmode="decimal" class="form-control" id="price" name="price"
+                value="{{editproduct.price}}" placeholder="Product Price" />
+        </div>
+        <div class="form-outline mb-4">
+            <input type="number" class="form-control" id="qty" name="qty" placeholder="Product QTY"
+                value="{{editproduct.qty}}" />
+        </div>
         <br>
-    <a type="button" class="btn btn-secondary" href="/">Close</a>
-    <input type="submit" class="btn btn-dark" value="Update" href="/">
-</form>
+        <a type="button" class="btn btn-secondary" href="/">Close</a>
+        <input type="submit" class="btn btn-dark" value="Update" href="/">
+    </form>
 </div>
-    {% endblock %}
+{% endblock %}

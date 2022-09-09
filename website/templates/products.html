@@ -19,7 +19,6 @@
             <div class="row flex-fill">
                 <div class="col-sm-5 ">
                     {% if product.product_name %}<h4 class="h5">{{ product.product_name }}</h4>{% endif %}
-                    {% if product.description %}<p class="p"> <strong>Description: </strong> {{ product.description }}</p>{% endif %}
                     {% if product.date %} <span class="badge bg-secondary">{{ product.date }}</span> {% endif %} 
                     {% if product.price %}<span class="badge bg-success">CHF {{ product.price}}</span>{% endif %}
                     {% if product.qty %}<span class="badge bg-info">QTY {{ product.qty}}</span>{% endif %}

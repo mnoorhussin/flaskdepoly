@@ -22,11 +22,13 @@ def home():
         date = request.form.get("date")
         qty = request.form.get("qty")
         price = request.form.get("price")
+        user_id = request.form.get("current_user.first_name")
+
 
         if len(product_name) < 1:
             flash('Product Name is too short!', category='error')
         else:
-            new_product = Product(product_name = product_name, description = description, date=date,price=price, qty=qty, user_id=current_user.id)
+            new_product = Product(product_name = product_name, description = description, date=date,price=price, qty=qty, user_id=current_user.first_name)
             db.session.add(new_product)
             db.session.commit()
             flash('Product added!', category='success')
@@ -48,6 +50,9 @@ def delete_product(id):
         return" There was problem deleting your product!"   
     else:
         return render_template("home.html", product_to_delete=product_to_delete, user=current_user)  
+
+
+
 
 
 

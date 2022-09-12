@@ -23,6 +23,7 @@ class Product(db.Model):
     qty = db.Column(db.Integer)
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
     
     
 class Employer(db.Model):

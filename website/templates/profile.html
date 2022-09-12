@@ -19,13 +19,33 @@
                     <strong>Last Name:</strong>
                     {{current_user.last_name[0]|upper}}{{current_user.last_name[1:] }}<br>
                     <strong>Email:</strong>
-                    {{current_user.email}}
+                    {{current_user.email}} <br>
+                    <strong>Role:</strong>
+                    {{current_user.role}}
                     <br><br>
-                    <a href="/logout" class="btn btn-dark">Logout</a><br><br>
                 </div>
-
                 <div class="col-4">
                     <img src="{{ url_for('static',filename='IMG/Avatar.png')}}" alt="Avatar" width="150" align="right">
+                </div>
+
+            </div>
+        </div>
+        <br>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-1">
+                    <a href="/update-user/{{user.id}}"
+                    class="btn btn-info float-right ml-2 stretched-link ">Edit</a></div>
+                <div class="col-1">
+                    <a href="/delete-user/{{user.id}}"
+                    class="btn btn-danger  ml-2 stretched-link">Delete</a>
+                </div>
+                <div class="col-8">
+                </div>
+
+                <div class="col-1">
+                    <a href="/logout" class="btn btn-dark">Logout</a><br><br>
                 </div>
             </div>
         </div>

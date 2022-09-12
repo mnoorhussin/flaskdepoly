@@ -1,0 +1,58 @@
+{% extends "base.html" %} {% block title %}Employers{% endblock %} {% block content%}
+<h1>Employers</h1>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 ">
+            <div class="row border-dark rounded" style="padding-top: 3px; background-color:rgba(0,0,0,.10);">
+                <div class="col-md-4">
+                    <strong>
+                        <p>Employee Name</p>
+                    </strong>
+                </div>
+                <div class="col-md-3">
+                    <strong>
+                        <p>Email</p>
+                    </strong>
+
+                </div>
+                <div class="col-md-3">
+                    <strong>
+                        <p>Role</p>
+                    </strong>
+
+                </div>
+                <div class="col-md-2">
+                    <strong>
+                        <p>Employee ID</p>
+                    </strong>
+
+                </div>
+            </div>
+            <br>
+            {% for employee in employee %}
+            <div class="container-fluid ">
+                <div class="row">
+                    <div class="col-md-12 border-bottom">
+                        <div class="row border-dark rounded" style="padding: 10px; background-color:rgba(0,0,0,.10);">
+                            <div class="col-md-4 border-right">
+                                {% if employee.first_name %}<img src="{{ url_for('static',filename='IMG/Avatar.png')}}"
+                                    alt="" class="thumb-sm  rounded-circle mr-2" width="50">
+                                {{employee.first_name[0]|upper}}{{employee.first_name[1:]}}
+                                {{employee.last_name[0]|upper}}{{employee.last_name[1:]}}{% endif %}
+                            </div>
+                            <div class="col-md-3 border-right">
+                                {% if employee.email %}{{ employee.email }}{% endif %}
+                            </div>
+                            <div class="col-md-3 border-right">
+                                {% if employee.role %}{{ employee.role }}{% endif %}
+                            </div>
+                            <div class="col-md-2 border-right">
+                                {% if employee.id %}{{ employee.id }}{% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            {% endfor %}
+            {% endblock %}

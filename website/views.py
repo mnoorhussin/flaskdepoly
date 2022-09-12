@@ -56,12 +56,12 @@ def delete_product(id):
 def update(id):
     editproduct = Product.query.get_or_404(id)
     if request.method == 'POST':
-        editproduct.product_name = request.form['product_name']
-        editproduct.description = request.form['description']
+        editproduct.product_name = request.form['product_name'] 
         editproduct.qty = request.form['qty']
         editproduct.price = request.form['price']
         try:
             db.session.commit()
+            flash("Product updated successfully")
             return redirect('/')
         except:
             return" There was problem updating your product!"        
@@ -70,8 +70,45 @@ def update(id):
         return render_template("update.html", editproduct=editproduct, user=current_user)
     
     
+@views.route('/delete-user/<int:id>')
+@login_required
+def delete_user(id):
+    user_to_delete = User.query.get_or_404(id)
+    try:
+        db.session.delete(user_to_delete)
+        db.session.commit()
+        flash("User deleted successfully")
+        return redirect('/profile')
+    except:
+        return" There was problem deleting User!"   
+    else:
+        return render_template("profile.html", user_to_delete=user_to_delete, user=current_user)  
+
+
+
+@views.route('/update-user/<int:id>', methods=['GET', 'POST'])
+@login_required
+def update_user(id):
+    edituser = User.query.get_or_404(id)
+    if request.method == 'POST':
+        edituser.first_name = request.form['first_name'] 
+        edituser.last_name = request.form['last_name']
+        edituser.email = request.form['email']
+        edituser.role = request.form['role']
+
+        try:
+            db.session.commit()
+            flash("User updated successfully")
+            return redirect('/profile')
+        except:
+            return" There was problem updating User!"        
+
+    else:
+        return render_template("update-user.html", edituser=edituser, user=current_user)   
     
     
+
+   
 @views.route('/products')
 @login_required
 def products():
@@ -83,5 +120,12 @@ def products():
 @views.route('/profile')
 @login_required
 def profile():
-    employers = User.query.all()
+    profile = User.query.all()
     return render_template("profile.html", User=User, user=current_user)
+
+
+@views.route('/employee')
+@login_required
+def employee():
+    employee = User.query.all()
+    return render_template("employee.html", employee=employee, user=current_user)

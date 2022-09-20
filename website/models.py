@@ -27,12 +27,5 @@ class Product(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     
-    
-class Employer(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    employer_firstname = db.Column(db.String(150))
-    employer_lastname = db.Column(db.String(150))
-    description = db.Column(db.String(10000))
-    date = db.Column(db.DateTime(timezone=True), default=func.now())
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
 

@@ -110,8 +110,7 @@ def update_user(id):
 
     else:
         return render_template("update-user.html", edituser=edituser, user=current_user)   
-    
-    
+
 
    
 @views.route('/products')

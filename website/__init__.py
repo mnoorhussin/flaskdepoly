@@ -17,6 +17,9 @@ def create_app():
     app.config['SECRET_KEY'] = 'just another website'
     app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+    app.config['WHOOSH_BASE'] = 'whoosh'
+
+    
     db.init_app(app)
     migrate = Migrate(app, db)
 

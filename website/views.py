@@ -4,7 +4,7 @@ from flask import Blueprint, render_template, request, flash, jsonify, redirect,
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_required, current_user
 from collections import Counter
-from .models import Product, Employer, User
+from .models import Product, User
 from .import db
 import json
 
@@ -110,8 +110,7 @@ def update_user(id):
 
     else:
         return render_template("update-user.html", edituser=edituser, user=current_user)   
-    
-    
+
 
    
 @views.route('/products')

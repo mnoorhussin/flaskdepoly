@@ -1,9 +1,11 @@
 from socketserver import DatagramRequestHandler
 from unicodedata import name
-from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for
+from flask import Blueprint, render_template, request, flash, jsonify, redirect, url_for, make_response, Response
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_required, current_user
 from collections import Counter
+from datetime import datetime
+import pdfkit
 from .models import Product, User
 from .import db
 import json
@@ -128,3 +130,16 @@ def profile():
 def employee():
     employee = User.query.all()
     return render_template("employee.html", employee=employee, user=current_user)
+
+
+
+
+
+
+@views.route('/detail/<int:id>')
+@login_required
+def detail(id):
+    product = Product.query.get_or_404(id)
+    return render_template("detail.html", product=product,  user=current_user)
+
+

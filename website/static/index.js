@@ -1,15 +1,3 @@
-function deleteProduct(productId) {
-  fetch('/delete-product', {
-    method: "POST",
-    body: JSON.stringify({ productId: productId }),
-  }).then((_res) => {
-    window.location.href = "/";
-  });
-}
-
-
-
-
 // Get the modal
 const modal = document.getElementById("Modal");
 
@@ -27,4 +15,8 @@ window.onclick = function (event) {
     modal.style.display = "none";
   }
 }
+
+
+
+
 

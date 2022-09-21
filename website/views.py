@@ -134,8 +134,6 @@ def employee():
 
 
 
-
-
 @views.route('/detail/<int:id>')
 @login_required
 def detail(id):
